@@ -1,0 +1,222 @@
+.wheel {
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    transform: scale(3) translate(260px, 136px) rotate(360deg);
+    transition: transform .6s linear;
+    z-index: 999;
+
+    &.slide-out {
+        transform: scale(1.75) translate(-26px, 240px) rotate(30deg);
+
+        .circle {
+            .slide {
+                opacity: .5;
+                filter: grayscale(1);
+                cursor: pointer;
+            }
+        }
+
+        .center {
+            transform: rotate(-30deg);
+        }
+    }
+
+    &:not(.slide-out) {
+        .circle {
+            .slide {
+                cursor: default!important;
+            }
+        }
+    }
+
+    .circle {
+        width: 240px;
+        height: 240px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all .6s linear;
+
+        .slide {
+            width: 120px;
+            height: 120px;
+            border-top-right-radius: 100%;
+            clip-path: polygon(0 100%, 100% 69.5%, 100% 0, 23% 0);
+            position: absolute;
+            top:0;
+            left: 120px;
+            overflow: hidden;
+            transition: all .6s linear;
+            z-index: 0;
+            transform-origin: left bottom;
+
+            &:before, &:after {
+                content: "";
+                display: block;
+                position: absolute;
+                width: 4rem;
+                height: 4rem;
+                left: 0;
+                bottom: 0;
+                background-color: #fff;
+                border-top-right-radius: 4rem;
+                z-index: 3;
+            }
+
+            &:after {
+                width: 165px;
+                height: 186px;
+                right: -34px;
+                top: -34px;
+                background-size: contain;
+                background-position: 25px 4px;
+                background-repeat: no-repeat;
+                z-index: 2;
+                transform: rotate(-48deg);
+                border-top-right-radius: 0;
+                background-position: 6px -3px;
+                background-size: contain;
+            }
+
+            &[data-index="1"] {
+                cursor: pointer;
+                transform: rotate(17deg);
+                &:after {
+                    background-image: url(../../assets/images/captain.jpg);
+                    background-size: 86%;
+                    transform: rotate(-17deg);
+                    background-position: -35px 5px;
+                }
+            }
+
+            &[data-index="6"] {
+                cursor: not-allowed;
+                transform: rotate(-43deg);
+                &:after {
+                    background-image: url(../../assets/images/engal.jpg);
+                    transform: rotate(45deg);
+                    background-size: 80%;
+                    background-position: 0 73px;
+                }
+            }
+
+            &[data-index="5"] {
+                cursor: not-allowed;
+                transform: rotate(-103deg);
+                &:after {
+                    background-image: url(../../assets/images/torn.jpg);
+                    transform: rotate(-250deg);
+                    background-size: 60%;
+                    background-position: 46px 55px;
+                }
+            }
+
+            &[data-index="4"] {
+                cursor: not-allowed;
+                transform: rotate(-163deg);
+                &:after {
+                    background-image: url(../../assets/images/spider.jpg);
+                    transform: rotate(143deg);
+                    background-position: 21px 44px;
+                }
+            }
+
+            &[data-index="3"] {
+                cursor: pointer;
+                transform: rotate(-223deg);
+                &:after {
+                    background-image: url(../../assets/images/guafu.jpg);
+                    transform: rotate(-138deg);
+                    background-position: 38px 45px;
+                    background-size: 92%;
+                }
+            }
+
+            &[data-index="2"] {
+                cursor: pointer;
+                transform: rotate(-283deg);
+                &:after {
+                    background-image: url(../../assets/images/iron.jpg);
+                    background-position: 6px 15px;
+                }
+            }
+        }
+
+        .bar {
+            width: 0;
+            height: 240px;
+            border-left: 3px solid #fff;
+            position: absolute;
+            transform: rotate(30deg);
+
+            &:before, &:after {
+                content: "";
+                display: block;
+                width: 0;
+                height: 240px;
+                border-left: 3px solid #fff;
+                position: absolute;
+                transform: rotate(60deg) translate(-1.5px, 2.5px);
+            }
+
+            &:after {
+                transform: rotate(120deg) translate(1.5px, 2.3px);
+            }
+        }
+    }
+
+    .center {
+        font-family: "Khand"!important;
+        width: 8rem;
+        height: 8rem;
+        background-color: #fff;
+        border-radius: 4rem;
+        position: absolute;
+        top: 3.5rem;
+        left: 3.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28px;
+        color: #141414;
+        font-weight: 700;
+        z-index: 4;
+    }
+
+    &[data-step="1"] {
+        .circle {
+            .slide[data-index="1"] {
+                transform: rotate(calc(17deg)) translate(4px,-4px) scale(1.1)!important;
+            }
+        }
+    }
+
+    &[data-step="3"] {
+        .circle {
+            .slide[data-index="3"] {
+                &:after {
+                    transform: rotate(-44deg);
+                    background-position: -26px 13px;
+                    background-size: 134%;
+                }
+            }
+        }
+    }
+
+    @for $i from 1 through 6 {
+        &[data-step="#{$i}"] {
+            .circle {
+                transform: rotate(calc(-60*#{$i - 1}deg));
+                .slide[data-index="#{$i}"] {
+                    z-index: 3;
+                    filter: grayscale(0);
+                    opacity: 1;
+                    transform: rotate(calc(17deg - 60*#{7 - $i}deg)) translate(4px,-4px) scale(1.1);
+                }
+            }
+        }
+    }
+}

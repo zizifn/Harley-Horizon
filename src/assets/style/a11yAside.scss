@@ -1,0 +1,425 @@
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    height: 3rem;
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+
+    span {
+        font-size: .875rem;
+        font-weight: 600;
+    }
+}
+
+.input-container {
+    position: relative;
+    input,select {
+        border: 1px solid #888;
+        border-radius: .5rem;
+        font-size: .875rem;
+        height: 2.25rem;
+        width: 6rem;
+        padding: .75rem .5rem 0 .5rem;
+        cursor: pointer;
+    }
+    label {
+        position: absolute;
+        z-index: 1;
+        font-size: .625rem;
+        white-space: nowrap;
+        top: 3px;
+        left: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #666;
+    }
+}
+
+.contract-list {
+    width: 100%;
+    border-top: 1px solid #ebebeb;
+
+    .contract {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        align-items: center;
+        padding: .5rem 1rem 0;
+        border-bottom: 1px solid #ebebeb;
+
+        &:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        &>button {
+            width: calc(100% - 1rem);
+            height: 2rem;
+            display: inline-flex;
+            justify-content: space-between;
+            flex-direction: column;
+            background-color: transparent;
+            border: none;
+            margin-bottom: .5rem;
+
+            &:hover {
+                cursor: pointer;
+            }
+            &>div {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+
+                span {
+                    display: block;
+                    font-size: 13px;
+                    line-height: 1;
+                }
+
+                &:nth-child(1) {
+                    span {
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            &[aria-expanded="true"]+.expandable {
+                display: flex;
+            }
+        }
+
+        .expandable {
+            gap: 1rem;
+            padding: 1rem;
+            min-width: 130%;
+            margin-left: -1rem;
+            padding-left: 1rem;
+            flex-direction: column;
+            display: none;
+            background-color: rgba($color: #4169e1, $alpha: 0.1);
+
+            &>div, &>ul {
+                gap: .75rem;
+                display: flex;
+                align-items: center;
+                width: 100%;
+
+                li {
+                    list-style: none;
+                    font-size: .875rem;
+
+                    span {
+                        font-size: .75rem;
+                        white-space: nowrap;
+
+                        &:nth-child(2) {
+                            font-size: .875rem;
+                            line-height: 1.25rem;
+                        }
+                    }
+
+                    &:nth-child(2) {
+                        &>span:nth-child(2) {
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+
+        .options {
+            height: 3rem;
+            position: absolute;
+            right: .5rem;
+            top: 0;
+            z-index: 1;
+            @include flexCenter;
+
+            button.icon-only {
+                background-color: transparent;
+                border: none;
+                outline: none;
+                width: 1.5rem;
+                height: 1.5rem;
+                @include flexCenter;
+
+                &.trash {
+                    display: none;
+                }
+
+                &.more {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                }
+            }
+        }
+    }
+}
+
+.summary {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    column-gap: 1rem;
+
+    ul.quote-list {
+        width: 100%;
+        justify-content: center;
+        column-gap: 1.5rem;
+        display: flex;
+        &>li {
+            list-style: none;
+            span {
+                display: block;
+                font-size: .875rem;
+                text-align: center;
+                line-height: 1.25rem;
+            }
+        }
+    }
+
+    .input-container {
+        margin-top: 1rem;
+        min-width: calc(50% - .5rem);
+        max-width: calc(50% - .5rem);
+        input,select {
+            width: 100%;
+            font-size: .875rem;
+        }
+
+        select {
+            padding-left: .25rem;
+        }
+    }
+}
+
+.bottom-section {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    
+    .gain-loss-group {
+        margin: 0 1rem 1rem;
+
+        &>div {
+            padding: .75rem 1rem;
+            @include flexCenter;
+            justify-content: space-between;
+            border-radius: .5rem;
+            border: 1px solid #ccc;
+            margin-bottom: 1rem;
+            position: relative;
+
+            span {
+                font-size: .75rem;
+
+                &:last-child {
+                    font-weight: 600;
+                }
+            }
+
+            &:first-child {
+                border-color: #368727;
+            }
+
+            &:nth-child(2) {
+                border-color: rgba(224,22,22, .75);
+            }
+
+            &:nth-child(3) {
+                align-items: flex-start;
+            }
+
+            &:nth-child(4) {
+                align-items: flex-start;
+                height: 3.5rem;
+            }
+        }
+
+        .possible-circle {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            transform: rotate(-45deg);
+            transform-origin: center;
+            background-color: transparent;
+            border-top: 8px solid #ebebeb;
+            border-left: 8px solid #ebebeb;
+            border-right: 8px solid #4169e1;
+            border-bottom: 8px solid #4169e1;
+            @include flexCenter;
+            padding: 0;
+
+            position: absolute;
+            right: 1rem;
+            top: .25rem;
+    
+            &:before {
+                content: "";
+                display: block;
+                min-width: 3rem;
+                min-height: 3rem;
+                border-radius: 50%;
+                background-color: transparent;
+                border-top: 8px solid transparent;
+                border-left: 8px solid transparent;
+                border-right: 8px solid #4169e1;
+                border-bottom: 8px solid #4169e1;
+                position: relative;
+                z-index: 1;
+                box-sizing: border-box;
+                transform: rotate(60deg);
+                transform-origin: center;
+            }
+    
+            &:after {
+                transform: rotate(45deg);
+                content: attr(data-rate);
+                display: block;
+                font-size: .875rem;
+                color: #141414;
+                background-color: transparent;
+                position: absolute;
+                z-index: 3;
+            }
+        }
+    }
+
+    button {
+        background-color: #4169e1;
+        color: #fff;
+        width: calc(100% - 2rem);
+        margin: 1rem auto;
+        height: 2.25rem;
+        border-radius: .5rem;
+        @include flexCenter;
+        border: none;
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 0 1rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .contract-list {
+        .contract {
+            padding-top: 0!important;
+            align-items: center;
+
+            &>button {
+                width: 200px;
+                margin-bottom: 0;
+            }
+            
+            .expandable {
+                padding: .5rem!important;
+                display: flex!important;
+                flex-direction: row!important;
+                min-width: unset!important;
+                background-color: transparent!important;
+        
+                &>div, &>ul {
+                    width: fit-content!important;
+                    gap: 1rem!important;
+                }
+
+                &>ul {
+                    li {
+                        position: relative;
+                        padding: 0 1rem;
+                        span {
+                            &:nth-child(1) {
+                                position: absolute;
+                                left: -999rem;
+                                z-index: -999;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &:first-child {
+                .expandable {
+                    &>ul {
+                        li {
+                            span {
+                                &:nth-child(1) {
+                                    position: absolute;
+                                    top: -2.25rem;
+                                    z-index: 0!important;
+                                    left: unset;
+                                    font-weight: 600;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+        }
+    }
+
+    .summary {
+        align-items: center;
+        column-gap: 1rem;
+        ul.quote-list {
+            width: fit-content;
+        }
+
+        .input-container {
+            margin-top: 0;
+            max-width: 8rem;
+            min-width: 8rem;
+        }
+        
+    }
+
+    .bottom-section {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+
+        .gain-loss-group {
+            min-width: 100%;
+            flex-direction: row;
+            display: flex;
+            column-gap: 1rem;
+            justify-content: flex-end;
+
+            &>div {
+                width: fit-content;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 0;
+                padding: .5rem 1rem;
+
+                span {
+                    white-space: nowrap;
+                    line-height: 1.225rem;
+                }
+
+                &:nth-child(4) {
+                    width: 14rem;
+                    position: relative;
+                }
+            }
+        }
+
+        button {
+            width: fit-content;
+            margin: 0 1rem 1rem auto;
+        }
+    }
+}
